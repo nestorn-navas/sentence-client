@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: discovery-lab-4-sentence
