@@ -14,18 +14,22 @@ public class DiscoveryController {
 	@Autowired
 	private LoadBalancerClient balancer;
 	
+	@Autowired
+	private SubjectFeignClient client;
+	
 	@RequestMapping("/sentence")
 	public @ResponseBody String getSentence() {
-		return getWord("SUBJECT") + " " + 
-	           getWord("VERB") + " " + 
-			   getWord("ARTICLE") + " " + 
-	           getWord("ADJECTIVE") + " " + 
-			   getWord("NOUN") + ".";
+		return client.getSubject(); 
+//	           getWord("VERB") + " " + 
+//			   getWord("ARTICLE") + " " + 
+//	           getWord("ADJECTIVE") + " " + 
+//			   getWord("NOUN") + ".";
 	}
 
 	public String getWord(String service) {
 		ServiceInstance instance = balancer.choose(service);
    		return (new RestTemplate()).getForObject(instance.getUri(),String.class);
 	}
+	
 
 }
