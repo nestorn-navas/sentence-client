@@ -15,15 +15,15 @@ public class DiscoveryController {
 	private LoadBalancerClient balancer;
 	
 	@Autowired
-	private SubjectFeignClient client;
+	private SubjectService subjectService;
 	
 	@RequestMapping("/sentence")
 	public @ResponseBody String getSentence() {
-		return client.getSubject(); 
-//	           getWord("VERB") + " " + 
-//			   getWord("ARTICLE") + " " + 
-//	           getWord("ADJECTIVE") + " " + 
-//			   getWord("NOUN") + ".";
+		return subjectService.getSubject() + " " +
+	           getWord("VERB") + " " + 
+			   getWord("ARTICLE") + " " + 
+	           getWord("ADJECTIVE") + " " + 
+			   getWord("NOUN") + ".";
 	}
 
 	public String getWord(String service) {
